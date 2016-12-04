@@ -1,0 +1,714 @@
+
+<!-- saved from url=(0054)http://web.stanford.edu/class/cs106b//assn/pqueue.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>CS106B</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+<link href="./CS106B_files/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./CS106B_files/style.css">
+
+<!-- Java Script -->
+<script async="" src="./CS106B_files/analytics.js"></script><script src="./CS106B_files/jquery.min.js"></script>
+<script src="./CS106B_files/moment.min.js"></script>
+<script src="./CS106B_files/bootstrap.min.js"></script>
+<script src="./CS106B_files/ace.js" type="text/javascript"></script><style id="ace_editor">.ace_editor {position: relative;overflow: hidden;font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;font-size: 12px;line-height: normal;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: text;min-width: 100%;}.ace_dragging, .ace_dragging * {cursor: move !important;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;}.ace_text-input.ace_composition {background: #f8f8f8;color: #111;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;/* setting pointer-events: auto; on node under the mouse, which changesduring scroll, will break mouse wheel scrolling in Safari */pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0px;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-moz-transition: opacity 0.18s;-webkit-transition: opacity 0.18s;-o-transition: opacity 0.18s;-ms-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;-moz-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;display: block;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}/*** Dark version for fold widgets*/.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-moz-transition: opacity 0.4s ease 0.05s;-webkit-transition: opacity 0.4s ease 0.05s;-o-transition: opacity 0.4s ease 0.05s;-ms-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-moz-transition: opacity 0.05s ease 0.05s;-webkit-transition: opacity 0.05s ease 0.05s;-o-transition: opacity 0.05s ease 0.05s;-ms-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style>
+
+
+<!-- Stanford -->
+<link href="./CS106B_files/css" rel="stylesheet" type="text/css">
+<link href="./CS106B_files/css(1)" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+	<!-- Navigation Bar -->
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand brand" href="http://web.stanford.edu/class/cs106b/">CS106B</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <!--<li><a href="#">Lectures</a></li>-->
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/pqueue.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lectures <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/1-Welcome/">1 Welcome</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/2-Functions/">2 Functions</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/3-Strings/">3 Strings</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/4-Vectors_Grid/">4 Vectors and Grid</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/5-Stacks_Queues/">5 Stacks and Queues</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/6-Sets_Maps/">6 Sets and Maps </a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/7-IntroRecursion/">7 Recursive Thinking</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/8-Fractals/">8 Fractals</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/9-RecursiveTrees/">9 Recursive Trees</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/10-RecursiveBacktracking/">10 Exhaustive Search and Recursive Backtracking</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/11-BigO/">11 Big-O, Asymptotic Analysis, Computational Complexity</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/12-Sorting/">12 Sorting</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/13-Memoization/">13 Memoization</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/14-Classes/">14 Classes</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/15-Pointers/">15 Pointers</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/16-DynamicAllocation/">16 DynamicAllocation</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/17-ImplementingVector/">17 Implementing Vector</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/18-LinkedLists/">18 Linked Lists</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/19-Trees/">19 Trees</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/20-BinaryHeaps/">20 Binary Heaps</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/21-BinarySearchTrees/">21 Binary Search Trees</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/22-Hashing/">22 Hashing</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/23-Graphs/">23 Graphs</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/24-GraphsII/">24 Graphs II</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/25-BFS_DFS/">25 Breadth First Search and Depth First Search</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/26-Dijkstra/">26 Dijkstra and A*</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/27-MSTs/">27 Minimum Spanning Trees</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/pqueue.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Handouts <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/1-GeneralInformation.pdf">1 - General Information</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/2-CoursePlacement.pdf">2 - Course Placement</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/3-NameHash.pdf">3 - Name Hash</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/4-Fauxtoshop.pdf">4 - Fauxtoshop</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/5-HonorCode.pdf">5 - Honor Code</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/velociraptorSafety.html">6 - Velociraptor Safety</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/bananagrams.html">7 - Bananagrams</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/midterm.html">8 - Midterm</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/search.html">9 - Search</a></li>
+            <!--<li><a href="//web.stanford.edu/class/cs106b//handouts/honor-code.pdf">Honor Code</a></li>-->
+            <!--<li><a href="//web.stanford.edu/class/cs106b//handouts/velociraptorSafety.html">Grids and Raptor Safety</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/bananagrams.html">Bananagrams</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/duoslango.html">Duoslango</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/midterm.html">Midterm Info</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/search.html">Search</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/final.html">Final Info</a></li>-->
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/pqueue.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assignments <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+           <!--<li><a href="//web.stanford.edu/class/cs106b//assn/serafini.html">2 Serafini</a></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/pqueue.html">5 PQueue</a></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/huffman.html">6 Huffman</a></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/trailblazer.html">7 Trailblazer</a></li>
+           <li role="separator" class="divider"></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/contest.html">Contest</a></li>-->
+           
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/3-NameHash.pdf">0 - Name Hash</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/assignments.html">1 - Fauxtoshop</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b/assn/serafini.html">2 - Serafini</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html">3 - Meta Academy</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/boggle.html">4 - Boggle</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/pqueue.html">5 - PQueue</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/huffman.html">6 - Huffman Encoding</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/trailblazer.html">7 - Trailblazer</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/pqueue.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sections <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section01.pdf">Section 01</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section01-solutions.pdf">Section 01 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section02.pdf">Section 02</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section02-solutions.pdf">Section 02 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section03.pdf">Section 03</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section03-solutions.pdf">Section 03 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section04.pdf">Section 04</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section04-solutions.pdf">Section 04 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section05.pdf">Section 05</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section05-solutions.pdf">Section 05 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section06.pdf">Section 06</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section06-solutions.pdf">Section 06 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section07.pdf">Section 07</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section07-solutions.pdf">Section 07 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section08.pdf">Section 08</a></li>
+            <!--<li><a href="//web.stanford.edu/class/cs106b//sections/section08-solutions.pdf">Section 08 Soln</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//sections/section09.pdf">Optional 09</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//sections/section09-solutions.pdf">Optional 09 Soln</a></li>-->
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/pqueue.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/overview.html">Course Overview</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/help.html">Help Hours Calendar</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/qt-creator.html">QT Creator</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/styleguide.html">Style Guide</a></li>
+            <!--<li><a href="//web.stanford.edu/class/cs106b//handouts/diff.html">Example Diff Tool</a></li>-->
+           <!--<li><a href=""><i>None yet!</i></a></li>-->
+
+          </ul>
+        </li>
+       
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://web.stanford.edu/class/cs106b//handouts/overview.html"><span class="glyphicon glyphicon-apple" aria-hidden="true"></span> Overview</a></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+	<div class="container">
+			
+		<!-- Header -->
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="pageHeader">
+					<h1>
+						Assignment 5: PQueue
+					</h1>
+
+					<p>
+						Created by Julie Zelenski, with edits by Jerry Cain, Keith Schwarz, Marty Stepp, Chris Piech and others.
+					</p>
+
+					<p class="subtleHeading">
+						November 7th, 2016
+					</p>
+
+					<!--<div class="alert alert-info" role="alert"><b>Coming Soon</b>: The handout will be up shortly!</div>-->
+					
+
+				</div>
+
+
+				<hr>
+			</div>
+		</div>
+
+		<div class="row" style="margin-bottom:25px">
+					<div class="col-sm-12">
+				<p>
+					</p><center>
+						<img style="width:80%" src="./CS106B_files/splash.png">
+						<!--<p style="text-align:center; margin-bottom:15px"><i>PQueue</i></p>-->
+					</center>
+				<p></p>
+			</div>
+		</div>
+
+		
+
+		<div class="row">
+			<div class="col-sm-9">
+
+				<p>
+					This assignment focuses on implementing a priority queue ("PQ") collection using several internal data structures, using pointers, arrays, dynamic memory allocation, linked lists, and heaps.  
+					The starter code for this project is available as a ZIP archive. A demo is availible as a JAR (see handout on how to <a href="http://web.stanford.edu/class/cs106b/handouts/howToRunJar.html">run a jar</a>):
+				</p>
+				<p>
+					</p><div class="row">
+						<div class="col-xs-3">
+							<center>
+							<a href="http://web.stanford.edu/class/cs106b//assnFiles/pqueue/cs106b-hw5-priority-queue-starter-files.zip"><span class="glyphicon glyphicon-save-file" aria-hidden="true" style="font-size: 5em;margin-left:5px"></span><br>
+					Starter Code</a>
+							</center>
+						</div>
+
+						<div class="col-xs-3">
+							<center>
+							<a href="http://web.stanford.edu/class/cs106b//assnFiles/pqueue/cs106b-hw5-priority-queue-demo.jar"><span class="glyphicon glyphicon-play-circle" aria-hidden="true" style="font-size: 5em;margin-left:5px"></span><br>
+					Demo Jar</a>
+							</center>
+						</div>
+					</div>
+				<p></p>
+
+				
+
+				<p>
+					Turn in the following files:
+					</p><ol>
+						<li><code>ArrayPriorityQueue.h / .cpp </code>, a PQ implementation using an unsorted array as internal storage</li>
+						<li><code>LinkedPriorityQueue.h / .cpp</code>, the C++ code for all of your recursion functions.</li>
+						<li><code>HeapPriorityQueue.h / .cpp</code>, the C++ code for all of your recursion functions.</li>
+					</ol>
+					We provide you with several other files to help you, but you should not modify them.
+				<p></p>
+
+
+				<p>
+					This is a pair assignment. You may work in a pair or alone. Find a partner in section or use the course message
+board. If you work as a pair, comment both members' names atop every code file. Only one of you should
+submit the program; do not turn in two copies. Submit using the Paperless system linked on the class web site.
+				</p>
+				
+			</div>
+			<div class="col-sm-3">
+				<div class="well info faq">
+					<b>Due Date:</b> PQueue is due Wednesday November 16th at 12:00pm.
+				</div>
+				<div class="well info faq">
+					<b>Y.E.A.H hours:</b> <br>
+					<span class="sidebaricon glyphicon glyphicon-calendar" aria-hidden="true"></span>
+					Wed, Nov 9th<br>
+						
+					<span class="sidebaricon glyphicon glyphicon-time" aria-hidden="true"></span> 
+					T.B.A.<br>
+
+					<span class="sidebaricon glyphicon glyphicon-home" aria-hidden="true"></span>
+					T.B.A.<br>
+
+					<!--<span class="sidebaricon glyphicon glyphicon-file" aria-hidden="true"></span>
+					<a href="//web.stanford.edu/class/cs106b//assnFiles/pqueue/yeah.pdf">Slides</a>-->
+				</div>
+				<!--<div class="well info faq" style="margin-bottom:5px;">
+					<b>Related Reading:</b> <br/>
+					
+
+
+					<a href="https://en.wikipedia.org/wiki/Boggle">The Boggle Game</a><br/>
+					<a href="https://en.wikipedia.org/wiki/C%2B%2B_classes">C++ Classes</a><br/>
+					
+				</div>-->
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<hr>
+				<h2>
+					The Priority Queue Collection
+				</h2>
+				<p>
+					A priority queue is a collection that is similar to a queue, except that the elements are enqueued with "priority" ratings.
+Then when the elements are dequeued later, they always come out in increasing order of priority. That is, regardless
+of the order in which you add (enqueue) the elements, when you remove (dequeue) them, the one with the lowest
+priority number comes out first, then the second-smallest, and so on, with the largest priority item coming out last.
+Priority queues are useful for modeling tasks where some jobs are more important to process than others, like the line
+of patients at an emergency room (a severely injured patient has higher "priority" than one with a cold).</p>
+<p>
+We will use the convention that a smaller priority number means a greater urgency, such that a priority-1 item would
+take precedence over a priority-2 item. Because terms like "higher priority" can be confusing, since a "higher" priority
+means a lower integer value, we will follow the convention in this document of referring to a "more urgent" priority
+for a smaller integer and a "less urgent" priority for a greater integer.
+				</p>
+				<p>
+					In this assignment, you will be writing three different implementations of a priority queue class that stores strings.
+If two strings in the queue have the same priority, you will break ties by considering the one that comes first in
+alphabetical order to come first. Use C++'s built-in relational operators (&lt;, &gt;, &lt;=, etc.) to compare the strings.
+				</p>
+				<p>
+					For example, if you enqueue these strings into a priority queue:
+					</p><ul>
+						<li>enqueue "x" with priority 5</li>
+						<li>enqueue "b" with priority 4</li>
+						<li>enqueue "a" with priority 8</li>
+						<li>enqueue "m" with priority 5</li>
+						<li>enqueue "q" with priority 5</li>
+						<li>enqueue "t" with priority 2</li>
+					</ul>
+				<p></p>
+				<p>
+					Then if you were to dequeue the strings, they would be returned in this order:
+					</p><ul>
+						<li>"t", then "b", then "m", then "q", then "x", then "a"</li>
+					</ul>
+				<p></p>
+
+				<p>
+					You could think of a priority queue as a <b>sorted queue</b> where the elements are sorted by priority, breaking ties by
+comparing the string elements themselves. But internally the priority queue might not actually store its elements in
+sorted order; all that matters is that when they are dequeued, they come out in sorted order by priority. An actual
+priority queue implementation is not required to store its internal data in any particular order, so long as it dequeues
+its elements in increasing order of priority. As we will see, this difference between the external expected behavior of
+the priority queue and its true internal state can lead to interesting differences in implementation.
+</p>
+
+<div class="alert alert-info">
+	<b>Your task:</b> You will implement each of these three versions of PQueue. For each implementation in addition to writing the implementation, in the comments include the worst case big-O for enqueue and dequeue. 
+	</div>
+				
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Priority Queue Implementations:</h2>
+				<p>
+					1) <code>ArrayPriorityQueue</code>: The first priority queue implementation you will write uses an unsorted array as its internal data storage. The only private member variables this class is allowed to have inside it are a pointer to your internal array of elements, and integers for the array's capacity and the priority queue's size. The elements of the array are not stored in sorted order internally. As new elements are enqueued, you should simply add them to the end of the array. When dequeuing, you must then search the array to find the smallest element and remove/return it. This implementation is simple to write and optimized for fast enqueuing but has slow dequeue/peeking and poor overall performance. The following is a diagram of the internal array state of an <code>ArrayPriorityQueue</code> after enqueuing the elements listed on the previous section:
+				</p>
+
+				<p>
+					
+</p><pre>  index     0       1       2       3       4       5       6       7       8       9
+        +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+  value | "x":5 | "b":4 | "a":8 | "m":5 | "q":5 | "t":2 |       |       |       |       | 
+        +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+</pre>
+				<p></p>
+
+				<p>
+					We supply you with a <code>PQEntry</code> structure that is a small object containing a string value and an integer priority. You should use this structure to store the elements of your priority queue along with their priorities in the array.
+				</p>
+
+				<p>
+					Remember to include the big-O of enqueue and dequeue in the comments in <code>ArrayPriorityQueue.h</code>.
+				</p>
+
+				<hr>
+
+				<p>
+					2) <code>LinkedPriorityQueue</code>: The second priority queue implementation you will write uses a sorted linked list as its internal data storage. This class is only allowed to have a single private member variable inside it: a pointer to the front of your list. The elements of the linked list are stored in sorted order internally. As new elements are enqueued, you should add them at the appropriate place in the linked list so as to maintain the sorted order. When dequeuing, you do not need to search the linked list to find the smallest element and remove/return it; it is always at the front of the list. This implementation is harder to write than the array implementation, and enqueuing to it is slower, but it is much faster for dequeue/peeking and has better overall performance. The following is a diagram of the internal linked list state of a LinkedPriorityQueue after enqueuing the elements listed on the previous section:
+				</p>
+				<p><img style="width:100%;" src="./CS106B_files/diagram1.png"></p>
+
+				<p>
+					The hardest part of this implementation is inserting a new node in the proper place when enqueue is called. You must look for the proper insertion point by finding the first element whose priority is at least as large as the new value to insert, breaking ties by comparing the strings. Remember that, as shown in class, you must often stop one node early so that you can adjust the next pointer of the preceding node. For example, if you were going to insert the value "o" with priority 5 into the list shown above , your code should iterate until you have a pointer to the node containing "m", as shown below:
+				</p>
+				<p><img style="width:100%;" src="./CS106B_files/diagram2.png"></p>
+				<p>
+					Once the current pointer shown above points to the right location, you can insert the new node as shown below:
+				</p>
+				<p><img style="width:100%;" src="./CS106B_files/diagram3.png"></p>
+				<p>We supply you with a <code>ListNode</code> structure that is a small object representing a single node of the linked list. Each ListNode stores a string value and integer priority in it, and a pointer to a next node. You should use this structure to store the elements of your priority queue along with their priorities.</p>
+
+
+				<p>
+					Remember to include the big-O of enqueue and dequeue in the comments in <code>LinkedPriorityQueue.h</code>.
+				</p>
+
+
+				<!-- HEAP -->
+				<hr>
+				<p>3) <code>HeapPriorityQueue</code>: The third priority queue implementation you will write uses a special array structure called a binary heap as its internal data storage. The only private member variables this class is allowed to have inside it are a pointer to your internal array of elements, and integers for the array's capacity and the priority queue's size.</p>
+
+				<p>
+					As discussed in <!--<a href="//web.stanford.edu/class/cs106b/lectures/16-PriorityQueues/">-->lecture<!--</a>-->, a binary heap is an unfilled array that maintains a "heap ordering" property where each index i is thought of as having two "child" indexes, i * 2 and i * 2 + 1, and where the elements must be arranged such that "parent" indexes always store more urgent priorities than their "child" indexes. To simplify the index math, we will leave index 0 blank and start the data at an overall parent "root" or "start" index of 1. One very desirable property of a binary heap is that the most urgent-priority element (the one that should be returned from a call to peek or dequeue) is always at the start of the data in index 1. For example, the six elements listed in the previous pages could be put into a binary heap as follows. Notice that the most urgent element, "t":2, is stored at the root index of 1.
+				</p>
+				<p>
+					</p><pre>index     0       1       2       3       4       5       6       7       8       9 
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+ 
+value |       | "t":2 | "m":5 | "b":4 | "x":5 | "q":5 | "a":8 |       |       |       | 
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+size = 6 
+capacity = 10</pre>
+				<p></p>
+
+				<p>
+					As discussed in lecture, adding (enqueuing) a new element into a heap involves placing it into the first empty index (7, in this case) and then "bubbling up" or "percolating up" by swapping it with its parent index (i/2) so long as it has a more urgent (lower) priority than its parent. We use integer division, so the parent of index 7 = 7/2 = 3. For example, if we added "y" with priority 3, it would first be placed into index 7, then swapped with "b":4 from index 3 because its priority of 3 is less than b's priority of 4. It would not swap any further because its new parent, "t":2 in index 1, has a lower priority than y. So the final heap array contents after adding "y":3 would be:
+				</p>
+
+				<p>
+					</p><pre>index     0       1       2       3       4       5       6       7       8       9 
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+ 
+value |       | "t":2 | "m":5 | <b style="color:red">"y":3</b> | "x":5 | "q":5 | "a":8 | <b style="color:red">"b":4</b> |       |       |
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+size = <b style="color:red">7</b> 
+capacity = 10</pre>
+				<p></p>
+
+				<p>
+					Removing (dequeuing) the most urgent element from a heap involves moving the element from the last occupied index (7, in this case) all the way up to the "root" or "start" index of 1, replacing the root that was there before; and then "bubbling down" or "percolating down" by swapping it with its more urgent-priority child index (i*2 or i*2+1) so long as it has a less urgent (higher) priority than its child. For example, if we removed "t":2, we would first swap up the element "b":4 from index 7 to index 1, then bubble it down by swapping it with its more urgent child, "y":3 because the child's priority of 3 is less than b's priority of 4. It would not swap any further because its new only child, "a":8 in index 6, has a higher priority than b. So the final heap array contents after removing "t":2 would be:
+				</p>
+
+				<p>
+					</p><pre>index     0       1       2       3       4       5       6       7       8       9 
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+ 
+value |       | <b style="color:red">"y":3</b> | "m":5 | <b style="color:red">"b":4</b> | "x":5 | "q":5 | "a":8 |       |       |       |
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+size = <b style="color:red">6</b> 
+capacity = 10</pre>
+				<p></p>
+
+				<p>
+					A key benefit of using a binary heap to represent a priority queue is efficiency. The common operations of enqueue and dequeue take only O(log N) time to perform, since the "bubbling" jumps by powers of 2 every time. The peek operation takes only O(1) time since the most urgent-priority element's location is always at index 1.
+				</p>
+
+				<p>
+					If nodes ever have a tie in priority, break ties by comparing the strings themselves, treating strings that come earlier in the alphabet as being more urgent (e.g. "a" before "b"). Compare strings using the standard relational operators like &lt;,&lt;=,&gt;,&gt;=,==,and!=. Donotmakeassumptionsaboutthelengthsofthestrings.
+				</p>
+
+				<p>
+					Changing the priority of an existing value involves looping over the heap to find that value, then once you find it, setting its new priority and "bubbling up" that value from its present location, somewhat like an enqueue operation.
+				</p>
+
+				<p>
+					For both array and heap PQs, when the array becomes full and has no more available indexes to store data, you must resize it to a larger array. Your larger array should be a multiple of the old array size, such as double the size. You must not leak memory; free all dynamically allocated arrays created by your class.
+				</p>
+
+				<p>
+					Remember to include the big-O of enqueue and dequeue in the comments in <code>HeapPriorityQueue.h</code>.
+				</p>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Priority Queue Operations:</h2>
+				<p>Each of your three priority queue implementations must support all of the following operations.</p>
+				<table class="table table-bordered" style="font-size: 14px;">
+					<thead>
+					<tr>
+					    <th style="width:240px">Member</th>
+					    <th>Description</th> 					 
+				    </tr>
+				    </thead>
+					<tbody><tr>
+					
+						<td>
+							<code>pq.enqueue(value, priority);</code>
+						</td>
+						<td>
+							In this function you should add the given string value into your priority queue with the given priority. Duplicates are allowed. Any string is a legal value, and any integer is a legal priority; there are no invalid values that can be passed.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pq.dequeue()</code>
+						</td>
+						<td>
+							In this function you should remove the element with the most urgent priority from your priority queue, and you should also return it. You should throw a string exception if the queue does not contain any elements.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pq.peek()</code>
+						</td>
+						<td>
+							In this function you should return the string element with the most urgent priority from your priority queue, without removing it or altering the state of the queue. You should throw a string exception if the queue does not contain any elements.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pq.peekPriority()</code>
+						</td>
+						<td>
+							In this function you should return the integer priority that is most urgent from your priority queue (the priority associated with the string that would be returned by a call to peek), without removing it or altering the state of the queue. You should throw a string exception if the queue does not contain any elements.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pq.changePriority(value, newPriority);</code>
+						</td>
+						<td>
+							In this function you will modify the priority of a given existing value in the queue. The intent is to change the value's priority to be more urgent (smaller integer) than its current value. If the given value is present in the queue and already has a more urgent priority to the given new priority, or if the given value is not already in the queue, your function should throw a string exception. If the given value occurs multiple times in the priority queue, you should alter the priority of the first occurrence you find when searching your internal data from the start.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pq.isEmpty()</code>
+						</td>
+						<td>
+							In this function you should return true if your priority queue does not contain any elements and false if it does contain at least one element.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pq.size()</code>
+						</td>
+						<td>
+							In this function you should return the number of elements in your priority queue.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pq.clear();</code>
+						</td>
+						<td>
+							In this function you should remove all elements from the priority queue.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>out &lt;&lt; pq</code>
+						</td>
+						<td>
+							You should write a &lt;&lt; operator for printing your priority queue to the console. The elements can print out in any order and must be in the form of "value":priority with {} braces, suchas {"t":2 , "b":4, "m":5, "q":5, "x":5, "a":8}. The PQEntry and ListNode structures both have &gt;&gt;operators that may be useful. Your formatting and spacing should match exactly. Do not place a \n or endl at the end.
+						</td>
+					</tr>
+				</tbody></table>
+				<p>
+					The headers of every operation must match those specified above. Do not change the parameters or function names.
+				</p>
+
+				<p>
+					<i>Constructor/destructor</i>: Each class must also define a parameterless constructor. If the implementation allocates any dynamic memory, you must ensure that there are no memory leaks by freeing any allocated memory at the appropriate time. This will mean that you will need a destructor for classes that dynamically allocate memory.
+				</p>
+
+				<p>
+					<i>Helper functions</i>: The members listed on the previous page represent a large fraction of each class's behavior. But you should add other members to help you implement all of the appropriate behavior. Any other member functions you provide must be private. Remember that each member function of your class should have a clear, coherent purpose. You should provide private helper members for common repeated operations. Make a member function and/or parameter const if it does not perform modification of the object's state.
+				</p>
+
+				<p>
+					Member variables: We have already specified what member variables you should have. Here are some other constraints:
+					</p><ul>
+						<li>Don't make something a member variable if it is only needed by one function. Make it local. Making a
+variable into a data member that could have been a local variable or parameter will hurt your Style grade.</li>
+						<li>
+							All data member variables in side each of your classes should be private.
+							</li>
+
+					</ul>
+				<p></p>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Other Implementation Details:</h2>
+				<p>Here are a few other constraints we expect you to follow that don't fit neatly into any other section.</p>
+				<ul>
+					<li>
+						The ArrayPriorityQueue has many similar aspects to the ArrayList written in lecture. It's completely fine to borrow any of the code from that lecture and use it in your Array PQ as needed. (Cite it as a source.)
+					</li>
+					<li>
+						The ArrayPriorityQueue's operations like changePriority, enqueue, and dequeue should not needlessly rearrange the elements of the array any more than necessary. For example, when changing an element's priority, don't remove and re-add that element to the array.
+					</li>
+					<li>
+						The LinkedPriorityQueue's operations should not make unnecessary passes over the linked list. For example, when enqueuing an element, a poor implementation would be to traverse the entire list once to count its size and to find the proper spot to insert, and then make a second traversal to get back to the spot to insert and add the new element. Do not make such multiple passes. Also, keep in mind that your LinkedPriorityQueue is not allowed to store an integer size member variable; you must use the presence of a NULL next pointer to figure out where the end of the list is and how long it is.
+					</li>
+					<li>
+						The HeapPriorityQueue must implement its operations efficiently using the "bubbling" or "percolating" described in this handout. It is important that these operations run in O(log N) time.
+					</li>
+					<li>
+						Duplicates are allowed in your priority queue, so be mindful of this. For example, the changePriority operation should affect only a single occurrence of a value (the first one found). If there are other occurrences of that same value in the queue, a single call to changePriority shouldn't affect them all.
+					</li>
+					<li>
+						You are not allowed to use a sort function to arrange the elements of any collection, nor are you allowed to create any temporary or auxiliary data structures inside any of your priority queue implementations. They must implement all of their behavior using only their primary internal data structure as specified.
+					</li>
+					<li>
+						You will need pointers for several of your implementations, but you should not use pointers-to-pointers (for example, ListNode**) or references to pointers (e.g. ListNode*&amp;).
+					</li>
+					<li>
+						You should not create any more ListNode objects than necessary. For example, if a LinkedPriorityQueue contains 6 elements, there should be exactly 6 ListNode objects in the chain, no more, no less. You shouldn't, say, have a seventh empty "dummy" node at the front or back of the list that serves only as a marker. You can declare as many local variable pointers to ListNodes as you like.
+					</li>
+				</ul>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Development Strategy and Hints:</h2>
+				<ul>
+					<li>
+						<b>Order of Implementation</b>: While you are free to implement the three priority queues in any order you wish, we strongly recommend that you implement them in the order we specified: Array, then Linked, then Heap. This goes from simplest to most difficult.
+					</li>
+					<li>
+						<b>Draw pictures</b>. When manipulating linkedlists, it is often helpful to draw pictures of the linkedlist before, during, and after each of the operations you perform on it. Manipulating linked lists can be tricky, but if you have a picture in front of you as you're coding it can make your job substantially easier.
+					</li>
+					<li>
+						<b>Don't panic</b>. You will be doing a lot of pointer gymnastics in the course of this assignment, and you will almost certainly encounter a crash in the course of writing your program. If your program crashes, resist the urge to immediately make changes to your code. Instead, look over your code methodically. Use the debugger to step through the code one piece at a time, or use the provided testing harness to execute specific commands on the priority queue. The bug is waiting there to be found, and with persistence you will find it. If your program crashes with a specific error message, try to figure out exactly what that message means. Don't hesitate to get in touch with your section leader, and feel free to stop by the LaIR or office hours.
+					</li>
+					<li>
+						<b>Testing</b>: Extensively test your program. Run the sample solution posted on the class web site to see the expected behavior of your queue classes. It allows you to interactively test each queue by calling any member functions in any order you like. Some provided expected outputs are posted on the class web site, but we do not guarantee that those outputs cover all possible cases. You should perform your own exhaustive testing.
+					</li>
+				</ul>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>
+					Possible Extra Features:
+				</h2>
+				<p>Thats all! You are done. Consider adding extra features.</p>
+				<button id="extensionButton" type="button" class="btn btn-primary btn-lg" onclick="$(&quot;#extension&quot;).show();$(&quot;#extensionButton&quot;).hide();" style="display: none;">Show Extensions</button>
+				<div id="extension" style="">
+				<p>
+					Though your solution to this assignment must match all of the specifications mentioned previously, it is allowed and encouraged for you to add extra features to your program if you'd like to go beyond the basic assignment. Here are some example ideas for extra features that you could add to your program.
+				</p>
+				<ol>
+					<li><b>Sorted Unfilled Array</b>: Similar to arrayPQ, but store elements in sorted order.</li>
+					<li><b>Map of Queues</b>: Use a Map with integer priorities as its keys and queues of strings as the values associated with those keys.  This puts all elements with the same priority into an inner queue together.</li>
+					<li><b>Doubly-Linked List</b>: Write a linked list whose nodes have both prev and next pointers.  This makes it easy to move both forward and backward in the list, which can speed up certain operations like changing priority.  Also declare both a front and a back pointer that point to the first and last element in the list respectively.</li>
+					<li><b>Binomial Heap</b>: A binomial heap is a variation on the binary heap already described that is especially efficient for certain common priority queue operations.  See separate handout on class web site describing this idea.</li>
+				</ol>
+				<p>Another good idea is to add operations to each heap beyond those specified:</p>
+				<ol>
+					<li>
+						<b>Merge</b>: Write a member function that accepts another priority queue of the same type and adds all of its elements into the current priority queue.  Do this merging "in place" as much as possible; for example, if you are merging two linked list PQs, directly connect the node pointers of one to the other as appropriate.</li>
+					<li>
+						<b>Deep Copy</b>: Make your priority queues properly support the = assignment statement, copy constructor, and deep copying.  See the C++ "Rule of Three" and follow that guideline in your implementation.
+					</li>
+					<li>
+						<b>Iterator</b>: Write a class that implements the STL iterator and a begin and end function in your priority queues, which would enable "for-each" over your PQ.  This requires knowledge of the C++ STL library.
+					</li>
+				</ol>
+				<p>Do you have an interesting idea for an extra feature?  Ask the head TA or instructor.</p>
+				
+				<p><i>Submitting with extra features</i>: If you complete any extras, please list them in your comment headings. Also please submit your program twice: first without extra features (or with them disabled), and a second time with the extensions.</p>
+
+			</div>
+		</div>
+
+		
+
+		
+
+
+
+		
+		
+
+
+
+
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+
+		<div class="footer">
+			<p class="pull-left">
+				© Stanford 2016 | Created by Chris Piech and Chris Gregg.
+				CS106B has been developed over decades by many talented teachers. 
+			</p>
+		</div>
+	</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74362126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	</div>
+
+	<script>
+		$('.editor').each(function( index ) {
+			var editor = ace.edit(this);
+			editor.setTheme('ace/theme/eclipse');
+		   editor.getSession().setMode("ace/mode/c_cpp");
+		   editor.setReadOnly(true);
+		   editor.setShowPrintMargin(false);
+		   editor.renderer.setShowGutter(false); 
+		   editor.setOptions({
+			    maxLines: Infinity,
+			    fontSize: "10pt"
+			});
+		   editor.setOption("highlightActiveLine", false);
+		});
+	</script>
+
+
+</div></body></html>

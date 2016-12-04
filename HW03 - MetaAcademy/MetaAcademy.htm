@@ -1,0 +1,992 @@
+
+<!-- saved from url=(0059)http://web.stanford.edu/class/cs106b//assn/metaAcademy.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>CS106B</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+<link href="./MetaAcademy_files/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./MetaAcademy_files/style.css">
+
+<!-- Java Script -->
+<script async="" src="./MetaAcademy_files/analytics.js"></script><script src="./MetaAcademy_files/jquery.min.js"></script>
+<script src="./MetaAcademy_files/moment.min.js"></script>
+<script src="./MetaAcademy_files/bootstrap.min.js"></script>
+<script src="./MetaAcademy_files/ace.js" type="text/javascript"></script><style id="ace_editor">.ace_editor {position: relative;overflow: hidden;font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;font-size: 12px;line-height: normal;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: text;min-width: 100%;}.ace_dragging, .ace_dragging * {cursor: move !important;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;}.ace_text-input.ace_composition {background: #f8f8f8;color: #111;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;/* setting pointer-events: auto; on node under the mouse, which changesduring scroll, will break mouse wheel scrolling in Safari */pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0px;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-moz-transition: opacity 0.18s;-webkit-transition: opacity 0.18s;-o-transition: opacity 0.18s;-ms-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;-moz-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;display: block;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}/*** Dark version for fold widgets*/.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);-webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-moz-transition: opacity 0.4s ease 0.05s;-webkit-transition: opacity 0.4s ease 0.05s;-o-transition: opacity 0.4s ease 0.05s;-ms-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-moz-transition: opacity 0.05s ease 0.05s;-webkit-transition: opacity 0.05s ease 0.05s;-o-transition: opacity 0.05s ease 0.05s;-ms-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style>
+
+
+<!-- Stanford -->
+<link href="./MetaAcademy_files/css" rel="stylesheet" type="text/css">
+<link href="./MetaAcademy_files/css(1)" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+	<!-- Navigation Bar -->
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand brand" href="http://web.stanford.edu/class/cs106b/">CS106B</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <!--<li><a href="#">Lectures</a></li>-->
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lectures <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/1-Welcome/">1 Welcome</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/2-Functions/">2 Functions</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/3-Strings/">3 Strings</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/4-Vectors_Grid/">4 Vectors and Grid</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/5-Stacks_Queues/">5 Stacks and Queues</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/6-Sets_Maps/">6 Sets and Maps </a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/7-IntroRecursion/">7 Recursive Thinking</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/8-Fractals/">8 Fractals</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/9-RecursiveTrees/">9 Recursive Trees</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/10-RecursiveBacktracking/">10 Exhaustive Search and Recursive Backtracking</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/11-BigO/">11 Big-O, Asymptotic Analysis, Computational Complexity</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/12-Sorting/">12 Sorting</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/13-Memoization/">13 Memoization</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/14-Classes/">14 Classes</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/15-Pointers/">15 Pointers</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/16-DynamicAllocation/">16 DynamicAllocation</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/17-ImplementingVector/">17 Implementing Vector</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/18-LinkedLists/">18 Linked Lists</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/19-Trees/">19 Trees</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/20-BinaryHeaps/">20 Binary Heaps</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/21-BinarySearchTrees/">21 Binary Search Trees</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/22-Hashing/">22 Hashing</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/23-Graphs/">23 Graphs</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/24-GraphsII/">24 Graphs II</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/25-BFS_DFS/">25 Breadth First Search and Depth First Search</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/26-Dijkstra/">26 Dijkstra and A*</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//lectures/27-MSTs/">27 Minimum Spanning Trees</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Handouts <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/1-GeneralInformation.pdf">1 - General Information</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/2-CoursePlacement.pdf">2 - Course Placement</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/3-NameHash.pdf">3 - Name Hash</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/4-Fauxtoshop.pdf">4 - Fauxtoshop</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/5-HonorCode.pdf">5 - Honor Code</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/velociraptorSafety.html">6 - Velociraptor Safety</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/bananagrams.html">7 - Bananagrams</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/midterm.html">8 - Midterm</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/search.html">9 - Search</a></li>
+            <!--<li><a href="//web.stanford.edu/class/cs106b//handouts/honor-code.pdf">Honor Code</a></li>-->
+            <!--<li><a href="//web.stanford.edu/class/cs106b//handouts/velociraptorSafety.html">Grids and Raptor Safety</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/bananagrams.html">Bananagrams</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/duoslango.html">Duoslango</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/midterm.html">Midterm Info</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/search.html">Search</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//handouts/final.html">Final Info</a></li>-->
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assignments <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+           <!--<li><a href="//web.stanford.edu/class/cs106b//assn/serafini.html">2 Serafini</a></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/pqueue.html">5 PQueue</a></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/huffman.html">6 Huffman</a></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/trailblazer.html">7 Trailblazer</a></li>
+           <li role="separator" class="divider"></li>
+           <li><a href="//web.stanford.edu/class/cs106b//assn/contest.html">Contest</a></li>-->
+           
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/3-NameHash.pdf">0 - Name Hash</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/assignments.html">1 - Fauxtoshop</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b/assn/serafini.html">2 - Serafini</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html">3 - Meta Academy</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/boggle.html">4 - Boggle</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/pqueue.html">5 - PQueue</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/huffman.html">6 - Huffman Encoding</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//assn/trailblazer.html">7 - Trailblazer</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sections <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section01.pdf">Section 01</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section01-solutions.pdf">Section 01 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section02.pdf">Section 02</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section02-solutions.pdf">Section 02 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section03.pdf">Section 03</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section03-solutions.pdf">Section 03 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section04.pdf">Section 04</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section04-solutions.pdf">Section 04 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section05.pdf">Section 05</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section05-solutions.pdf">Section 05 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section06.pdf">Section 06</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section06-solutions.pdf">Section 06 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section07.pdf">Section 07</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section07-solutions.pdf">Section 07 Soln</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//sections/section08.pdf">Section 08</a></li>
+            <!--<li><a href="//web.stanford.edu/class/cs106b//sections/section08-solutions.pdf">Section 08 Soln</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//sections/section09.pdf">Optional 09</a></li>
+            <li><a href="//web.stanford.edu/class/cs106b//sections/section09-solutions.pdf">Optional 09 Soln</a></li>-->
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/overview.html">Course Overview</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/help.html">Help Hours Calendar</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/qt-creator.html">QT Creator</a></li>
+            <li><a href="http://web.stanford.edu/class/cs106b//handouts/styleguide.html">Style Guide</a></li>
+            <!--<li><a href="//web.stanford.edu/class/cs106b//handouts/diff.html">Example Diff Tool</a></li>-->
+           <!--<li><a href=""><i>None yet!</i></a></li>-->
+
+          </ul>
+        </li>
+       
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://web.stanford.edu/class/cs106b//handouts/overview.html"><span class="glyphicon glyphicon-apple" aria-hidden="true"></span> Overview</a></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+	<div class="container">
+			
+		<!-- Header -->
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="pageHeader">
+					<h1>
+						Assignment 3: Meta Academy
+					</h1>
+
+					<p>
+						Synthesis by Chris Piech. Based on a handout by Marty Stepp. Problems by Eric Roberts, Stuart Reges and Chris Piech.
+					</p>
+
+					<p class="subtleHeading">
+						October 14, 2016
+					</p>
+
+					<!--<div class="alert alert-info" role="alert"><b>Preflight</b>: We are going to continue to refine this writeup until 5:00pm Tuesday</div>-->
+					
+
+				</div>
+
+
+				<hr>
+			</div>
+		</div>
+
+		<div class="row" style="margin-bottom:25px">
+					<div class="col-sm-12">
+				<p>
+					</p><center>
+						<img style="max-width:70%" src="./MetaAcademy_files/meta.png">
+						<p style="text-align:center; margin-bottom:15px"><i>In order to learn recursion, you will teach recursion. <br>In order to teach recursion, you must first learn recursion. <br>Thanks to Khan Academy (no affiliation) for the image.</i></p>
+					</center>
+				<p></p>
+			</div>
+		</div>
+
+		
+
+		<div class="row">
+			<div class="col-sm-9">
+
+				<p>
+					In this assignment you will build tools for a learning platform, called Meta Academy, that teaches recursion. Online learning platforms like Coursera, Khan Academy and one day Meta Academy, offer education to anyone for free. If the quality of the education delivered were high enough this could have an enormous social impact. There are many open questions in this domain, and several of the open questions like "how do we generate personalized content?" and "how can we understand students as they learn?" can be approached using computer science techniques. In fact, current state of the art solutions for knowledge tracing, finding optimal student routes and several other problems are recursive algorithms. 
+				</p>
+
+				<p>
+					This assignment consists of two main types of contributions: (1) demonstrations of how recursion works and  (2) tools for computational education. The aim of this assignment is to get you warmed up to recursion: that beautiful but sometimes mind-bending new way of solving problems. In order to build the Meta Academy you will write five different recursive functions.
+					The starter code for this project is available as a ZIP archive:
+				</p>
+				<p>
+					<a href="http://web.stanford.edu/class/cs106b//assnFiles/meta/cs106b-hw3-starter.zip"><span class="glyphicon glyphicon-save-file" aria-hidden="true" style="font-size: 5em;margin-left:5px"></span><br>
+					Starter Code</a>
+				</p>
+
+				<!--<p> There have been a small number of edits to the assignment writeup and a one line change to the starter file. The most recent change was made <b>Tuesday Jan 26th at 5pm</b>. Here is a <a href="//web.stanford.edu/class/cs106b/assnFiles/meta/changesLog.txt">log</a> of all the changes we have made.
+                                -->
+				<p>
+					Turn in only the following file:
+					</p><ol>
+						<li><code>recursion.cpp</code>, the C++ code for all of your recursion functions.</li>
+					</ol>
+				<p></p>
+
+				<p>
+					This is a pair assignment. You may work in a pair or alone. Find a partner in section or use the course message
+board. If you work as a pair, comment both members' names atop every code file. Only one of you should
+submit the program; do not turn in two copies. <b>You will not help either partner by "dividing up the assignment (e.g., "you do 1,2,3 and I'll do 4,5")</b>. Working as partners means that both partners should <i>always</i> work at one computer, together. There should never be a time where a partner is working independently on a pair-programming assignment.</p><p>
+
+Submit using the Paperless system linked on the class web site.
+				</p>
+				
+			</div>
+			<div class="col-sm-3">
+				<div class="well info faq">
+					<b>Due Date:</b> Meta Academy is due Monday, October  24th at 12:00pm (noon).
+				</div>
+				<!--<div class="well info faq">
+					<b>Submit:</b> You can submit multiple times. We will grade your latest submission.
+				</div>-->
+				<div class="well info faq">
+					<b>Y.E.A.H hours:</b> <br>
+					<span class="sidebaricon glyphicon glyphicon-calendar" aria-hidden="true"></span>
+					Date Monday, October 17th<br>
+						
+					<span class="sidebaricon glyphicon glyphicon-time" aria-hidden="true"></span> 
+					Time 7pm-8pm<br>
+
+					<span class="sidebaricon glyphicon glyphicon-home" aria-hidden="true"></span>
+					Location TBA<br>
+
+					<span class="sidebaricon glyphicon glyphicon-file" aria-hidden="true"></span>
+                                        <!--<a href="//web.stanford.edu/class/cs106b//assnFiles/meta/yeah.pdf">Slides</a>-->
+				</div>
+				<div class="well info faq" style="margin-bottom:5px;">
+					<b>Related Reading:</b> <br>
+
+
+					<a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclid's Algorithm</a><br>
+					<a href="https://en.wikipedia.org/wiki/Formal_grammar">Grammars</a><br>
+					<a href="https://code.org/research">Code.org research</a><br>
+					<a href="http://www.nytimes.com/2016/01/24/opinion/sunday/what-a-million-syllabuses-can-teach-us.html">Open Syllabus Proj.</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<hr>
+				<h2>
+					Overview
+				</h2>
+				<p>
+					When you run Meta Academy you will be presented with a menu that has 5 options (plus the choice to exit). You would have been more than able to write the code to; navigate the menu, output instructions and update the display. However, we provide you with code that already does those basic operations. This allows you to focus on writing the recursive functions. 
+				</p>
+				<center>
+						<img style="max-width:100%" src="./MetaAcademy_files/menu.png">
+						<p style="text-align:center; margin-bottom:15px"><i>The Meta Academy menu. This should run with your starter code.</i></p>
+					</center>
+				<p>
+					When you first download the starter code, run the program and try each menu item to see how the program works. The five menu items are:
+				</p>
+				<ol>
+					<li><a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#demoDef">Demo recursion by definition</a>. You write a simple recursive function for greatest common divisor.</li>
+					<li><a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#demoFractals">Demo recursion for fractals</a>. You write a serpinskii fractal.</li>
+					<li><a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#demoExploration">Demo recursion for exploration</a>. You write flood fill.</li>
+					<li><a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#personalCurriculum">Personal curriculum</a>. You write a recursive function that helps a student find the best path to their learning goal.</li>
+					<li><a href="http://web.stanford.edu/class/cs106b//assn/metaAcademy.html#generate">Generate question</a>. You write a recursive function that generates a random question.</li>
+				</ol>
+				<p>
+					Once all of these are written you will have a tool to start teaching others recursion. And there is nothing like teaching to help you learn.
+				</p>
+
+				<p>
+					For all the functions you have to write in this assignment you <b>must use recursion</b>. That is for two reasons. First, the point of this assignment is for you to learn recursion. Second, all of the problems are ones for which recursion is the most natural fit. 
+				</p>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 id="demoDef">
+					Milestone 1: Greatest Common Denominator
+				</h2>
+				<p>
+					For this problem, write a recursive function to compute the greatest common divisor that shows its work:
+				</p>
+				<p>
+					</p><pre class="well" style="background:white">int <b>gcd</b>(int a, int b)</pre>
+				<p></p>
+				<p>
+					Some operations are much easier to define recursively. 
+   					One amazing example of this is Euclid's Algorithm to 
+    				calculate the greatest common divisor (GCD). In the algorithm 
+    				Euclid famously shows that the <code>gcd(a, b)</code> is equal to 
+    				<code>gcd(b, r)</code> where r is the remainder when you divide a by b. 
+   					In the case where b is equal to 0, <code>gcd(a, 0)</code> is simply a. 
+    				Since gcd is defined recursively, it is much easier to program 
+    				using recursion. Let's calculate gcd.
+				</p>
+				
+				<center>
+						<img style="max-width:60%" src="./MetaAcademy_files/gcd.png">
+						<p style="text-align:center; margin-bottom:15px; margin-top:10px"><i>Euclid's recursive definition of GCD.</i></p>
+					</center>
+
+				<p>
+					When the user choses to show the demo of recursion by definition, the meta program will call the function <code>int gcd(int a, int b)</code> that you will write (see <code>recursion.cpp</code>). Your job is to calculate the gcd of the values that are passed in and to show your work as you go. Each invocation of the GCD function should create an output that shows how that invocation calculated the GCD.
+				</p>
+
+				<center>
+						<img style="max-width:50%" src="./MetaAcademy_files/gcdRun.png">
+						<p style="text-align:center; margin-bottom:15px; margin-top:10px"><i>An example run of the recursive definition demo, that calls your gcd function.</i></p>
+					</center>
+
+				<p>
+					As an aside, though its straightforward to take Euclid's recursive definition and turn it into C++ code, it's slightly more challenging to see why it holds true. Understanding the proof for why it is true is beyond what we are asking of you, but for those so inclined you can check out the proof on the <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm#Proof_of_validity">wikipedia</a> page (warning: not simple). It is amazing to imagine that someone came up with this idea around 2,300 years ago. 
+
+				</p><hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+
+				<h2 id="demoFractals">
+					Milestone 2: Serpinskii Fractal
+				</h2>
+
+				<p>
+					For this problem, write a recursive function to draw a Serpinskii triangle:
+				</p>
+				<p>
+					</p><pre class="well" style="background:white">void <b>drawSierpinskiTriangle</b>(GWindow&amp; gw, int x, int y, int size, int order)</pre>
+				<p></p>
+
+				<p>
+					Recursion can also create incredible graphic designs of images that have self-similar subparts. One example is the Sierpinski Triangle, named after the Polish mathematician Waclaw Sierpinski. 
+				</p>
+
+				<p>Your function should draw a black outlined Sierpinski triangle when passed a reference to a graphical window, the x/y
+coordinates of the top/left of the triangle, the length of each side of the triangle, and the order of the figure to draw
+(such as 1 for Order-1, etc.). The provided files already contain a main function that constructs the window and passes the relevant information to your function. The rest is up to you.</p>
+
+				<p>
+					If the order passed is 0, your function should not draw anything. If the order passed is negative, your
+function should throw a string exception. Otherwise you may assume that the window passed is large enough to
+draw the figure at the given position and size.
+					</p>
+
+				<p>
+					If you search the web for fractal designs, you will find many intricate wonders beyond the Koch snowflake illustrated
+in Chapter 8. One of these is the Sierpinski Triangle, named after its inventor, the Polish mathematician Waclaw
+Sierpinski (1882–1969). The order-1 Sierpinski Triangle is an equilateral triangle, as shown in the diagram below.
+				</p>
+
+				<p>
+					To create an order-K Sierpinski Triangle, you draw three Sierpinski Triangles of order K-1, each of which has half the
+edge length of the original. Those three triangles are placed in the corners of the larger triangle. Take a look at the
+Order-2 Sierpinski triangle below to get the idea
+				</p>
+
+				<p>
+					The upward-pointing triangle in the middle of the Order-2 figure is not drawn explicitly, but is instead formed by the
+sides of the other three triangles. That area, moreover, is not recursively subdivided and will remain unchanged at
+every order of the fractal decomposition. Thus, the Order-3 Sierpinski Triangle has the same open area in the middle.
+				</p>
+
+				<div class="row">
+					<div class="col-xs-3">
+						<center>Order 1</center>
+					</div>
+					<div class="col-xs-3">
+						<center>Order 2</center>
+					</div>
+					<div class="col-xs-3">
+						<center>Order 3</center>
+					</div>
+					<div class="col-xs-3">
+						<center>Order 7</center>
+					</div>
+				</div>
+
+				<center>
+					<img style="max-width:100%" src="./MetaAcademy_files/serpinskii-bare.png">
+					<p style="text-align:center; margin-bottom:15px; margin-top:10px"><i>Different order Serpinskii triangles.</i></p>
+				</center>
+
+				<p>
+					We have not really learned much about the GWindow class, but you do not need to know much about it to solve this
+problem. The only member function you will need from the GWindow is its drawLine function:
+				</p>
+
+				<pre style="background-color:white">gw.drawLine(x1, y1, x2, y2);</pre>
+				<p>Which draws a line from point (x1, y1) to point (x2, y2)</p>
+
+				<p>Note: You may find yourself needing to compute the height of a given triangle so you can
+pass the right x/y coordinates to your function or to the drawing functions. Keep in mind
+that the height h of an equilateral triangle is not the same as its side length s. The diagram
+at right shows the relationship between the triangle and its height. You may want to look
+at information about <a href="https://en.wikipedia.org/wiki/Equilateral_triangle">equilateral triangles</a> on Wikipedia and/or refresh your trigonometry. You may also find the worked examples from the <a href="http://web.stanford.edu/class/cs106b//lectures/8-Fractals">Fractals</a> class to be useful.</p>
+
+				
+
+				<p>Another thing you should avoid is re-drawing the same line multiple times. If your code is structured well, you should never end up drawing a line again (or part of a line again) that was already drawn.</p>
+
+				<p></p>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+
+				<h2 id="demoExploration">
+					Milestone 3: Flood Fill
+				</h2>
+
+				<p>
+					For this problem, write a recursive function to perform a "flood fill" on a graphical window as described below.
+				</p>
+
+				<p>
+					</p><pre class="well" style="background:white">int <b>floodFill</b>(GBufferedImage&amp; image, int x, int y, int color)</pre>
+				<p></p>
+
+				<p>
+					A third great use of recursion is when you want to explore a series of decisions. Often decision making is recursive. Once you make one decision you find yourself in a situation which is of the same format. Here we will show how recursion can be used to explore a region of pixels. We will recursively try all possible combinations of making the decisions: move up a pixel, move left, move right and move down.
+				</p>	
+
+				<p>
+					Most computer drawing programs make it possible to fill a region with a solid color. Typically you do this by selecting
+the "fill" tool and selecting a color, then clicking the mouse somewhere in your drawing. When you click, the paint
+color spreads outward from the point you clicked to every contiguous part of the image that is the same color as the
+pixel where you clicked. For example, if you select the Fill tool and choose Red as your color, then click on a purple
+part of the image, the Fill operation will cause that part of the image, along with any purple part that is touching it, to
+become red. The screenshots below provide an illustration:
+				</p>
+
+				<center>
+					<img style="max-width:80%" src="./MetaAcademy_files/floodFill.png">
+					<p style="text-align:center; margin-bottom:15px; margin-top:10px"><i>Flood fill demonstration.</i></p>
+				</center>
+
+				<p>
+					Think of the image as being composed of a 2-D grid of tiny square dots called pixels (picture elements). When the
+user clicks, whatever color that pixel was, it should be replaced by the fill color outward in all four directions: up,
+down, left, and right. For example, if the initial pixel color is purple, change it to red, then explore one pixel up, down,
+left, and right from there, looking for more purple pixels and changing them to red. If your exploration leads you to a
+pixel that is a different color (such as yellow rather than purple in our example), stop exploring in that direction.
+				</p>
+
+				<p>
+					Drawing pixels: The Sierpinski Triangle problem asks you to interact with a GWindow object, but that class is not
+built for accessing individual pixels. So we will use a different object called GBufferedImage to color pixels here.
+You can use the following member functions of the buffered image object to get and set the color of individual pixels.
+				</p>
+
+				<table class="table table-bordered" style="font-size: 14px;">
+					<thead>
+					<tr>
+					    <th style="width:300px">Command</th>
+					    <th>Description</th> 					  </tr>
+					<tr>
+					</tr></thead>
+						<tbody><tr><td>
+							<code>image.getRGB(x, y);</code>
+						</td>
+						<td>
+							returns the color of the given pixel as an integer.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>image.setRGB(x, y, color);</code>
+						</td>
+						<td>
+							sets the color of the given pixel to the given color as an integer.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>image.getWidth(); image.getHeight();</code>
+						</td>
+						<td>
+							returns the width or height of the image in pixels.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>image.inBounds(x, y);</code>
+						</td>
+						<td>
+							returns true if pixel (x, y) is within the bounds of the image
+						</td>
+					</tr>
+					
+				</tbody></table>
+
+				<p>
+					Your code should take care not to access any pixel outside of the bounds of the graphical image, (0, 0) through
+(width-1, height-1). If you try to get/set a pixel color that is out of bounds, your program will crash.
+				</p>
+
+				<p>
+					int color: The colors of pixels are returned as int values. The exact values that map to various colors don't
+especially matter to your code, though you can see what color maps to what integer value by looking at the
+<code>meta.cpp</code> file. If you want to print a color out on the console for debugging, it is easier to view it in
+hexadecimal (base-16) mode. To do that, you'd issue a special 'hex' command to cout to make it print an integer in
+hexadecimal rather than decimal (base-10), such as the following:
+				</p>
+
+				<pre style="background-color:white">cout &lt;&lt; hex &lt;&lt; color &lt;&lt; endl;</pre>
+
+				<p>
+					Optimization: For efficiency, your function is required to implement a particular optimization. If the caller passes
+the same fill color as the current pixel's existing color, do not color any pixels and immediately return 0. For example,
+if the user has the Fill color set to Blue and clicks a blue area, your function should immediately return 0. You can
+test whether your function is implementing this correctly by watching the console's output while clicking
+				</p>
+
+				<p>
+					Return value: Your function must return the total number of pixels that changed color. For example, if your code
+ends up filling a 50x30 rectangular region, your function would return 1500. If no pixels change color, return 0.
+				</p>
+
+				<p>
+					On some machines (such as my machine), filling a very large area of pixels can crash your program because of too many nested function
+calls ("stack overflow"). This is out of your control. You may ignore this issue, so long as your algorithm is correct.
+				</p>
+
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+
+				<h2 id="personalCurriculum">
+					Milestone 4: Personalized Curriculum
+				</h2>
+
+				<p>
+					For this problem, write a recursive function to calculate a personalized curriculum for a student as described below.
+				</p>
+
+				<p>
+					</p><pre class="well" style="background:white">void <b>personalCurriculum</b>(Map&lt;string, Vector&lt;string&gt; &gt; &amp; prereqMap, string goal)</pre>
+				<p></p>
+
+				<p>
+					When students learn, they come with a variety of different goals. If a learner wants to master a particular goal-concept they may not need to learn every other concept in the course. Instead they just need to learn that goal-concept and all the course concepts that it builds upon. The point of the Personalized Curriculum tool is to output, for a particular course and a particular goal, all of the required concepts that the student must learn to be ready to learn their "goal-concept." The concepts should be printed in an order such that if the student were to learn the concepts in that order they never would be working on a concept for which they don't have the necessary pre-requisites. Here are two examples:
+				</p>
+
+				<p>
+					</p><center>
+
+						<img style="width:47%;" src="./MetaAcademy_files/prereq1.png">	
+						<img style="width:47%; margin-left:5%;" src="./MetaAcademy_files/prereq2.png">
+						<p style="text-align:center; margin-bottom:15px"><i>Two example runs of Personalized Curriculum</i></p>
+					</center>
+				<p></p>
+
+				<h4 class="secondHeading">Prerequisite Concepts</h4>
+
+				<p>
+					In order to compute a personalized curriculum we are going to be given a prereqMap that associate each concept with the immediate prerequisites needed for that concept. You are probably familiar with the idea of prerequisites on the course level. Our class cs106b lists cs106a as a prerequisite. The course cs107 lists cs106b as its only prerequisite. However, in order to take cs107 you must first take cs106a then cs106b as prerequisites apply recursively. In general the you can calculate all prerequisites of a concept using the following recursion:
+					</p><pre><i>allPrereqsOfConcept(prereqMap, concept){
+    it's direct prerequisites and 
+    for (childConcept : direct prerequisites){
+        allPrereqsOfConcept(prereqMap, childConcept)
+    }
+}</i></pre>
+
+
+
+					The first example run (the one on the left) invokes personalized curriculum on the "recursion" course, which is a tiny course you can use to test your program (it does not include all concepts in cs106b). Here is the chain of prerequisites for that course:
+				<p></p>
+				
+
+				<p>
+					</p><center>
+
+						<img style="width:70%;" src="./MetaAcademy_files/recursionGraph.png">	
+						<p style="text-align:center; margin-bottom:15px"><i>The recursion prerequisite relationship is the smallest one you can test your algorithm on. An arrow means that in order to learn the concept on the right, you must first learn the concept on the left.</i></p>
+					</center>
+				<p></p>
+
+				<p>
+					If your goal is to learn "exploration recursion" you must first learn "recursion." Before you learn "recursion" you must learn its prerequisites, "collections" and "functions." The pattern continues until you get to "simpleC++" which has no prerequisites. Thus if your goal was to learn "exploration recursion" then a good personalized curriculum for you would be:
+
+					</p><pre style="background:white">simpleC++
+function calls
+collections
+recursion
+exploration recursion</pre>
+				<p></p>
+
+				<p>One important note: if you recursively expand the prerequisites of "exploration recursion" some concepts will be generated many times. A common mistake will be to output the concept more than once.</p>
+
+				<pre style="background:white">simpleC++
+functionCalls
+simpleC++
+collections
+recursion
+explorationRecursion</pre>
+
+				<p>Use a collection to keep track of the concepts you have already printed so that if you have already told the student they should learn, for example, "simpleC++" you don't list "simpleC++" again.</p>
+
+				<h4 class="secondHeading">Prerequisite Map</h4>
+
+				<p>
+					When you run Personalized Curriculum you will be given the prerequisite map that corresponds to the course the user selected. You do <b>not</b> have to load the prerequisite map from file. As an example, if personalized curriculum was run on the <code>recursion</code> course you would be passed the following <code>prereqMap</code>:
+				</p>
+
+				<p>
+					</p><pre style="background:white">"fractals"             → ["recursion"]
+"explorationRecursion" → ["recursion"]
+"definitionRecursion"  → ["recursion"]
+"recursion"            → ["collections", "functionCalls"]</pre>
+				<p></p>
+
+				<h4 class="secondHeading">Courses</h4>
+
+
+				<p>
+					There are three different courses that we have created:
+				</p>
+				<table class="table table-bordered" style="font-size: 14px;">
+					<thead>
+					<tr>
+					    <th style="width:100px">Command</th>
+					    <th>Description</th> 					  </tr>
+					<tr>
+					</tr></thead>
+						<tbody><tr><td>
+							<code>cs106b</code>
+						</td>
+						<td>
+							A general prerequisite map for the entire cs106b course.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>recursion</code>
+						</td>
+						<td>
+							A tiny prerequisite map only focused on the concept of recursion.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>stanfordcs</code>
+						</td>
+						<td>
+							The prerequisite map for many of the courses in the stanford cs department. (There is a corresponding file stanfordcs-names.txt that shows how the course numbers map to course names).
+						</td>
+					</tr>
+					
+					
+				</tbody></table>
+
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+
+				<h2 id="generate">
+					Milestone 5: Generate Question
+				</h2>
+
+				<p>
+					For this problem, write a recursive function to generate a random expansion of a grammar as described below. You can use this function to create random question for students to answer -- specifically we are going to make random program traces (like the sort you will have to do on your midterm).
+				</p>
+
+				<p>
+					</p><pre class="well" style="background:white">string <b>generate</b>(Map&lt;string, Vector&lt;string&gt; &gt; &amp; grammar, string symbol)</pre>
+				<p></p>
+
+				<h4 class="secondHeading">Grammars</h4>
+
+				<div class="alert alert-info"><b>Edit (Oct 17th):</b> when working on this milestone we stongly suggest that you <b>first</b> test your code on <code>sentence.txt</code> and then make sure that the same code works with <code>mystery.txt</code>. Both are grammars. We added a new example to show a grammer expansion for mystery.</div>
+
+				<p>
+					A formal language is a set of words and/or symbols along with a set of rules, collectively called the syntax of the
+language, defining how those symbols may be used together. A grammar is a way of describing the syntax and
+symbols of a formal language. Many language grammars are described in a format called Backus-Naur Form (BNF). Since most languages are recursive, BNF is too.
+</p>
+
+				<p>
+					Some symbols in a grammar are called terminals because they represent fundamental words of the language. A
+terminal in English might be "boy" or "run" or "Jessica". Other symbols of the grammar are called non-terminals and
+represent high-level parts of the language syntax, such as a noun phrase or a sentence. Every non-terminal consists of
+one or more terminals; for example, the verb phrase "throw a ball" consists of three terminal words.
+				</p>
+
+				<p>
+					The BNF description of a language consists of a set of derivation rules, where each rule names a symbol and the legal
+transformations that can be performed between that symbol and other constructs in the language. For example, a
+BNF grammar for the English language might state that a sentence consists of a noun phrase and a verb phrase, and
+that a noun phrase can consist of an adjective followed by a noun or just a noun. Rules can be described recursively (in
+terms of themselves). For example, a noun phrase might consist of an adjective followed by another noun phrase,
+such as the phrase "big green tree" which consists of the adjective "big" followed by the noun phrase "green tree".
+				</p>
+
+				<p>
+					A BNF grammar is specified as an input file containing one or more rules, of the form:
+				</p>
+				<pre style="background:white">non-terminal: rule|rule|rule|...|rule</pre>
+
+				<p>
+					In the following example, non-terminal names &lt;s&gt;, &lt;np&gt; and &lt;tv&gt; are short for linguistic elements sentences, noun
+phrases, and transitive verbs respectively.
+				</p>
+
+				<pre style="background:white">&lt;s&gt;:&lt;np&gt; &lt;vp&gt;
+-----
+&lt;np&gt;:&lt;dp&gt; &lt;adjp&gt; &lt;n&gt;|&lt;pn&gt; 
+-----
+&lt;dp&gt;:the|a
+-----
+&lt;adjp&gt;:&lt;adj&gt;|&lt;adj&gt; &lt;adjp&gt;
+-----
+&lt;adj&gt;:big|fat|green|wonderful|faulty|subliminal|pretentious
+-----
+&lt;n&gt;:dog|cat|man|university|father|mother|child|television
+-----
+&lt;pn&gt;:John|Jane|Sally|Spot|Fred|Elmo
+-----
+&lt;vp&gt;:&lt;tv&gt; &lt;np&gt;|&lt;iv&gt;
+-----
+&lt;tv&gt;:hit|honored|kissed|helped
+-----
+&lt;iv&gt;:died|collapsed|laughed|wept
+-----</pre>
+
+				<p>
+					This grammar's language can represent sentences such as "The fat university laughed" and "Elmo kissed a green
+pretentious television". This grammar cannot describe the sentence "Stuart kissed the teacher" because the words
+"Stuart" and "teacher" are not part of the grammar. It also cannot describe "fat John collapsed Spot" because there
+are no rules that permit an adjective before the proper noun "John", nor an object after intransitive verb "collapsed".
+					</p>
+
+				<p>
+					In this milestone you are going to use grammars that describe different question types. Your task will be to generate random questions using those grammars. Your function will be passed in a grammar as a <code>Map&lt;string, Vector&lt;string&gt; &gt; grammar</code> which will associate each non-terminal with the Vector of each of its production rules (the strings separated by the | symbols). Using the grammar above as an example the key <code>&lt;np&gt;</code> would map to a vector with two elements:
+
+					</p><pre style="background:white">&lt;np&gt; → ["&lt;dp&gt; &lt;adjp&gt; &lt;n&gt;", "&lt;pn&gt;"]</pre>
+
+
+				<p></p>
+
+				<h4 class="secondHeading">Random Expansions</h4>
+
+				<p>Your function
+involves recursively walking the grammar data structure to generate elements by successively expanding them. To generate a random occurrence of a symbol S:</p>
+
+<p>
+</p><ul>
+	<li>If S is a terminal symbol, there is nothing to do; the result is the symbol itself.</li>
+	<li>If S is a non-terminal symbol, choose a random expansion rule R for S.
+For each of the symbols in the rule R, generate a random occurrence of that symbol.</li>
+	</ul>
+<p></p>
+
+	<p>
+		For example, the grammar on the previous page could be used to randomly generate a &lt;s&gt; non-terminal for the
+sentence, "Fred honored the green wonderful child", as shown in the following diagram.
+	</p>
+
+	<center>
+					<img style="max-width:100%" src="./MetaAcademy_files/expansion.png">
+					<p style="text-align:center; margin-bottom:15px; margin-top:10px"><i>Exansion example.</i></p>
+				</center>
+
+				<p>
+					If the string passed to your function is a non-terminal in your grammar, use the grammar's rules to recursively expand
+that symbol fully into a sequence of terminals. For example, using the grammar on the previous pages, a call of
+grammarGenerate("&lt;np&gt;") might potentially return the string, "the green wonderful child"
+				</p>
+
+				<p>
+					Generating a non-terminal involves picking one of its rules at random and then generating each part of that rule,
+which might involve more non-terminals to recursively generate. For each of these you pick rules at random and
+generate each part, etc.
+				</p>
+
+				<p>
+					When you encounter a terminal, simply include it in your string. This becomes a base case. If the string passed to
+your function is not a non-terminal in your grammar, you should assume that it is a terminal symbol and return
+it.
+				</p>
+
+				<h4 class="secondHeading">Generate</h4>
+
+				<p>
+					Your job is to write the recursive function generate that takes in a grammar and a symbol and expands that symbol using the grammar. 
+				</p>
+
+				<p>
+					When you want to loop over a string exansion you will need to process the string one "token" at a time where a token could be a non-terminal or a terminal. CS106B has a handy library <code>TokenScanner</code> that makes this very easy. Here is an example:
+				</p>
+
+
+				<pre style="background:white">TokenScanner scanner(production);
+while (scanner.hasMoreTokens()) {
+   string token = scanner.nextToken();
+   // do something with token
+}</pre>
+
+				<h4 class="secondHeading">Random Question Expansion</h4>
+
+				<p>
+					Start by testing your code on <code>sentence.txt</code>. Once it is working, try using the grammar <code>mystery.txt</code> to expand the symbol QUESTION. If your code is working correctly this should produce a random recursion code-trace question. 
+				</p>
+
+				<p>
+					There are three different question grammars that come with the starter code (and the sentence grammar described above):
+				</p>
+				<table class="table table-bordered" style="font-size: 14px;">
+					<thead>
+					<tr>
+					    <th style="width:100px">Command</th>
+					    <th>Description</th> 					  
+					</tr>
+					
+					</thead>
+					<tbody><tr>
+						<td>
+							<code>sentence.txt</code>
+						</td>
+						<td>
+							This is not a recursion question, but we provided this grammar for testing.
+						</td>
+					</tr><tr>
+					</tr>
+						<tr><td>
+							<code>mystery.txt</code>
+						</td>
+						<td>
+							A template for a random mystery trace problem.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>mysteryHard.txt</code>
+						</td>
+						<td>
+							A template for a random mystery trace problem for people who love a challenge.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>collectionsRecursion.txt</code>
+						</td>
+						<td>
+							A template for slightly ambiguous recursion problems using collections.
+						</td>
+					</tr>
+					
+					
+					
+				</tbody></table>
+				<p>
+					Here is an example question that we generated when expanding the QUESTION symbol for the <code>mystery.txt</code> grammar:
+
+					</p><pre style="background:white">int mystery(int level, int x) {
+   if(level == 0) {
+      return 5;
+   } else {
+      int r = mystery(level - 1, r);
+      return r % x + 1;
+   }
+}
+What is the result of mystery(3, 5);</pre>
+				<p></p>
+
+
+				
+
+				<hr>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>
+					Possible Extra Features:
+				</h2>
+				<p>Thats all! You are done. Consider adding extra features.</p>
+				<button id="extensionButton" type="button" class="btn btn-primary btn-lg" onclick="$(&quot;#extension&quot;).show();$(&quot;#extensionButton&quot;).hide();">Show Extensions</button>
+				<div id="extension" style="display:none">
+				<p>
+					Though your solution to this assignment must match all of the specifications mentioned previously, it is allowed and encouraged for you to add extra features to your program if you'd like to go beyond the basic assignment. Here are some example ideas for extra features that you could add to your program.
+				</p>
+				<ol>
+					<li>Anything you want that helps teach recursion!</li>
+				</ol>
+				<h4 class="secondHeading">Indicating that you have done extra features:</h4>
+				<p>
+					 If you complete any extra features, then in the comment heading on the top of your program, please list all extra features that you worked on and where in the code they can be found (what functions, lines, etc. so that the grader can look at their code easily).
+				</p>
+				<h4 class="secondHeading">Submitting a program with extra features:</h4>
+				<p>Since we use automated testing for part of our grading process, it is important that you submit a program that conforms to the preceding spec, even if you want to do extra features. If your feature(s) cause your program to change the output that it produces in such a way that it no longer matches the expected sample output test cases provided, you should submit two versions of your program file: a first one named life.cpp without any extra features added (or with all necessary features disabled or commented out), and a second one named life-extra.cpp with the extra features enabled. Please distinguish them in by explaining which is which in the comment header. Our turnin system saves every submission you make, so if you make multiple submissions we will be able to view all of them; your previously submitted files will not be lost or overwritten.</p>
+			</div>
+
+			</div>
+		</div>
+		
+
+
+
+
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+
+		<div class="footer">
+			<p class="pull-left">
+				© Stanford 2016 | Created by Chris Piech and Chris Gregg.
+				CS106B has been developed over decades by many talented teachers. 
+			</p>
+		</div>
+	</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74362126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	</div>
+
+	<script>
+		$('.editor').each(function( index ) {
+			var editor = ace.edit(this);
+			editor.setTheme('ace/theme/eclipse');
+		   editor.getSession().setMode("ace/mode/c_cpp");
+		   editor.setReadOnly(true);
+		   editor.setShowPrintMargin(false);
+		   editor.renderer.setShowGutter(false); 
+		   editor.setOptions({
+			    maxLines: Infinity,
+			    fontSize: "10pt"
+			});
+		   editor.setOption("highlightActiveLine", false);
+		});
+	</script>
+
+
+</body></html>
